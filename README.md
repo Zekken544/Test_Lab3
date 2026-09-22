@@ -89,3 +89,24 @@ Cart latency-ийн SLO-г baseline p95 × 1.5 буюу
 Chaos туршилтын дараа бодит хүсэлтийн тоогоор budget-ийг шалгана.
 Сэргэлтийн хугацааг тусад нь хэмжинэ; checks threshold нь сэргэлтийн
 хугацааг автоматаар шалгахгүй.
+
+## Хэвийн ачааллын туршилт — PASS
+
+Серверийг зогсоохгүйгээр 20 VU, 1 минутын турш тест ажиллуулав.
+
+| SLI | Босго | Бодит үр дүн | Үнэлгээ |
+|---|---|---|---|
+| Cart p95 | < 1.5 ms | 783.77 µs буюу 0.78377 ms | PASS |
+| Report p95 | < 450 ms | 399.04 ms | PASS |
+| Payment error rate | < 8% | 5.93% буюу 55 / 926 | PASS |
+| Availability | ≥ 90% | k6 гаралтаар 98.02% | PASS |
+
+Нийт 2778 хүсэлтээс 2723 нь амжилттай, 55 нь алдаатай байв.
+Cart p99 = 4.27 ms, report p99 = 404.26 ms.
+Төлбөрийн алдаатай check-үүд байсан боловч error rate нь 8%-ийн
+босгоос бага тул reliability threshold биелсэн.
+Дөрвөн threshold бүгд PASS болсон.
+
+[Бүтэн гаралт](results/pass.txt)
+
+![PASS terminal screenshot](docs/screenshots/pass.png)
