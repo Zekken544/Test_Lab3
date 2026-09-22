@@ -87,6 +87,18 @@ Cart 207, report 212, payment 283 алдаатай хүсэлттэй байв. 
 
 ## Зориудын FAIL тест
 
+`slo-test-fail.js` файлд зөвхөн report threshold-ыг `p(95)<100` болгож, 20 VU, 1 минутын тест ажиллуулав.
+
+| SLI | Босго | Бодит үр дүн | Үнэлгээ |
+|---|---|---|---|
+| Cart p95 | < 1.5 ms | 0.71061 ms | PASS |
+| Report p95 | < 100 ms | 399.35 ms | FAIL |
+| Payment error rate | < 8% | 4.75% | PASS |
+| Availability | ≥ 90% | 98.41% | PASS |
+
+Report endpoint хамгийн багадаа 200 ms хүлээдэг тул 100 ms босго зөрчигдсөн. Гаралтад `thresholds on metrics 'http_req_duration{name:report}' have been crossed` гэж гарч, **exit=99** буцаасан. CI pipeline энэ nonzero exit code-ийг ашиглан тестийн алхмыг амжилтгүй гэж тэмдэглэх боломжтой.
+
+[Бүтэн гаралт](results/fail.txt) · [Дэлгэцийн зураг](docs/screenshots/fail.png)
 **Энэ хэсэг хараахан хийгдээгүй.** `slo-test-fail.js`-д report threshold-ыг `p(95)<100` болгож, бүтэн гаралт болон exit code-ийг `results/fail.txt`-д хадгална. Бодит үр дүнг тестийн дараа нэмнэ.
 
 ## Нотолгоо
@@ -108,3 +120,4 @@ Chaos үед серверийн сэргэлт 15 секундийн зорил�
 Нэг зогсолт availability болон payment reliability-г зэрэг зөрчиж болохыг харсан.
 Цагийн budget болон хүсэлтийн budget ижил үр дүн өгдөггүйг тооцоогоор шалгасан.
 Latency PASS байсан ч хүсэлтүүд алдаж болох тул зөвхөн хурдыг харах хангалтгүй гэж дүгнэв.
+Зориудын FAIL тестээр report latency-ийн босго зөрчигдөхөд k6 exit code 99 буцаадгийг баталсан.
