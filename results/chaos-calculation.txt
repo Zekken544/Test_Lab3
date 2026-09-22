@@ -1,0 +1,13 @@
+﻿Source: results/chaos.txt
+Total requests = 5679
+Successful requests = 4977
+Failed requests = 702
+Availability = 4977 / 5679 * 100 = approximately 87.64%
+k6 displayed availability = 87.63%
+Allowed failure budget = 5679 * 0.10 = 567.9 requests
+Maximum allowed whole-number failures = 567
+Excess over whole-number allowance = 702 - 567 = 135
+Time-based comparison budget = 120 * 0.10 = 12 seconds
+Source: results/chaos-timing.txt
+Observed recovery = 10.6580919 seconds
+Recovery target <= 15 seconds: PASS
